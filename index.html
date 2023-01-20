@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>WebKit bug: rotating CSS animations break layer order</title>
+  <style>
+    /* SpinKit plane spinner. Source: https://github.com/tobiasahlin/SpinKit */
+    .spinner {
+      width: 50px;
+      height: 50px;
+      background-color: #222;
+      animation: spinner 2s infinite ease-in-out;
+    }
+
+    /* SpinKit plane spinner animation, rotate seems to cause the issue */
+    @keyframes spinner {
+      0% { transform: perspective(120px) rotateX(0deg) rotateY(0deg); }
+      50% { transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg); }
+      100% { transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg); }
+    }
+
+    /* Horizontal and vertical center */
+    .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* Covers the entire screen with like a modal might, purple background */
+    .overlay {
+      z-index: 1000;
+      background-color: rebeccapurple;
+      margin: 0;
+      padding: 0;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      position: fixed;
+    }
+
+    p {
+      text-align: center;
+      color: white;
+      font-size: 1.5em;
+      font-weight: 900;
+    }
+  </style>
+</head>
+<body>
+
+<!-- A centered text overlay with a purple background -->
+<div class="overlay center">
+  <p>
+    This text is the only<br />
+    thing that should be<br />
+    visible on a purple<br />
+    background.
+  </p>
+</div>
+
+<!-- A centered rotating square spinner -->
+<div class="center">
+  <div class="spinner"></div>
+</div>
+
+</body>
+</html>
