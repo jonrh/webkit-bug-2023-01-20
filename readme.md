@@ -5,7 +5,8 @@
 
 2023-01-20
 
-Demo: https://webkit-bug-2023-01-20.vercel.app
+Demo: https://webkit-bug-2023-01-20.vercel.app  
+WebKit Bugzilla: https://bugs.webkit.org/show_bug.cgi?id=250919
 
 This repository is a reproduction of a WebKit bug where an element with a CSS 
 `rotate()` animation that is hidden behind other elements creates weird render 
